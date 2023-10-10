@@ -10,7 +10,13 @@ Essa primeira atividade tinhamos como intuito criar uma classe para salvar image
 ## Estrutura do código
 
 - A classe (`GenerateImage`) responsável por armazenar os arquivos `.ppm` e converter para `.png` está em `src/utils/GenerateImage.ts`. Essas imagens são salvas em `src/out` no diretorio respectivo de sua extensão (`.ppm` está em `src/out/ppm` e `.png` está em `src/out/png`).  
+    - Funções:
+        - `generateGradientImage`: Gera a imagem de um gradiente
+        - `generateCircleImage`: Gera a imagem de um circulo
+        - `generateSquareImage`: Gera a imagem de um quadrado
+        - `generateImage`: Gera o arquivo `.ppm` e `.png`
 - O arquivo `src/index.ts` está responsável por criar a função `main`, intanciar a classe `GenerateImage` e chamar os métodos que irão gerar e converter as imagens (Gradiente, Circulo e Quadrado).
+
 
 ## Como executar
 
