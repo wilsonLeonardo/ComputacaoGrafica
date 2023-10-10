@@ -39,8 +39,8 @@ export default class GenerateImage {
         );
 
         let r = 0;
-        let g = 0;
-        let b = 0;
+        const g = 0;
+        const b = 0;
 
         if (distanceToCenter <= radius) {
           r = 255;
@@ -59,9 +59,9 @@ export default class GenerateImage {
 
     for (let i = 0; i < this.imageHeight; ++i) {
       for (let j = 0; j < this.imageWidth; ++j) {
-        let r = 0;
+        const r = 0;
         let g = 0;
-        let b = 0;
+        const b = 0;
         if (
           j >= centerX - halfSize &&
           j <= centerX + halfSize &&
@@ -90,7 +90,9 @@ export default class GenerateImage {
         `${sourcePath}/png/${filename}.png`,
       ],
       async (err, _res) => {
-        if (err) throw err;
+        if (err) {
+          throw err;
+        }
         console.log(
           `Files ${filename}.ppm and ${filename}.png image created successfully in scr/out!`
         );
