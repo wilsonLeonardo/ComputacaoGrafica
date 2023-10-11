@@ -1,12 +1,20 @@
-import im from "imagemagick";
-import fs from "fs";
+import im from 'imagemagick';
+import fs from 'fs';
 
+/**
+ *
+ * Class responsible for generate and save images
+ */
 export default class GenerateImage {
   constructor(
     private imageWidth: number = 255,
-    private imageHeight: number = 255
+    private imageHeight: number = 255,
   ) {}
 
+  /**
+   *
+   * this method generate a gradient image
+   */
   public generateGradientImage(filename: string): void {
     let content = `P3\n${this.imageWidth} ${this.imageHeight}\n255\n`;
 
@@ -25,6 +33,11 @@ export default class GenerateImage {
     }
     this.generateImage(filename, content);
   }
+
+  /**
+   *
+   * this method generate a image with a circle
+   */
   public generateCircleImage(filename: string): void {
     const centerX = this.imageWidth / 2; // Coordenada x do centro do círculo
     const centerY = this.imageHeight / 2; // Coordenada y do centro do círculo
@@ -34,9 +47,7 @@ export default class GenerateImage {
 
     for (let i = 0; i < this.imageHeight; ++i) {
       for (let j = 0; j < this.imageWidth; ++j) {
-        const distanceToCenter = Math.sqrt(
-          (j - centerX) ** 2 + (i - centerY) ** 2
-        );
+        const distanceToCenter = Math.sqrt((j - centerX) ** 2 + (i - centerY) ** 2);
 
         let r = 0;
         const g = 0;
@@ -50,6 +61,11 @@ export default class GenerateImage {
     }
     this.generateImage(filename, content);
   }
+
+  /**
+   *
+   * this method generate a image with a square
+   */
   public generateSquareImage(filename: string): void {
     const centerX = this.imageWidth / 2; // Coordenada x do centro do quadrado
     const centerY = this.imageHeight / 2; // Coordenada y do centro do quadrado
@@ -62,12 +78,7 @@ export default class GenerateImage {
         const r = 0;
         let g = 0;
         const b = 0;
-        if (
-          j >= centerX - halfSize &&
-          j <= centerX + halfSize &&
-          i >= centerY - halfSize &&
-          i <= centerY + halfSize
-        ) {
+        if (j >= centerX - halfSize && j <= centerX + halfSize && i >= centerY - halfSize && i <= centerY + halfSize) {
           // Define a cor verde
           g = 255;
         }
@@ -79,24 +90,20 @@ export default class GenerateImage {
     this.generateImage(filename, content);
   }
 
+  /**
+   *
+   * this method generate the .ppm and .png files
+   */
   private generateImage(filename: string, content: string) {
     const sourcePath = `./src/out`;
 
     fs.writeFileSync(`${sourcePath}/ppm/${filename}.ppm`, content);
 
-    im.convert(
-      [
-        `${sourcePath}/ppm/${filename}.ppm`,
-        `${sourcePath}/png/${filename}.png`,
-      ],
-      async (err, _res) => {
-        if (err) {
-          throw err;
-        }
-        console.log(
-          `Files ${filename}.ppm and ${filename}.png image created successfully in scr/out!`
-        );
+    im.convert([`${sourcePath}/ppm/${filename}.ppm`, `${sourcePath}/png/${filename}.png`], async (err) => {
+      if (err) {
+        throw err;
       }
-    );
+      console.log(`Files ${filename}.ppm and ${filename}.png image created successfully in scr/out!`);
+    });
   }
 }
