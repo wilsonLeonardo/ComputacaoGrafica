@@ -1,0 +1,19 @@
+{
+  "plugins": [
+    "@typescript-eslint/eslint-plugin",
+    "eslint-plugin-tsdoc",
+    "prettier"
+  ],
+  "extends": [
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2022,
+    "sourceType": "module"
+  },
+  "rules": {
+    "tsdoc/syntax": "warn"
+  },
+  "ignorePatterns": ["/node_modules/"]
+}
