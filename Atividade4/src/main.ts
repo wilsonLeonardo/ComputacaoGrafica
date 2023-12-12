@@ -2,7 +2,10 @@
 import writeColor, { Color } from './utils/Color';
 import GenerateImage from './utils/GenerateImage';
 import { Point3, Ray } from './utils/Ray';
+import CustomOBJParser from './utils/objParser/CustomOBJParser';
+import { ObjModel } from './utils/objParser/ICustomOBJParser';
 import { Vec3, cross, dot, unitVector } from './vec/vec3';
+import fs from 'fs';
 
 /**
  * Checks if a ray intersects with a sphere.
@@ -170,6 +173,87 @@ export function drawTriangle(
 }
 
 /**
+ * Checks if a ray intersects with a 3D object defined by its vertices and faces.
+ * @param obj - The 3D object model (vertices and faces).
+ * @param r - The ray to check for intersection.
+ * @returns True if the ray intersects with the object, otherwise false.
+ */
+export function hitObj(obj: ObjModel, r: Ray): boolean {
+  for (const face of obj.faces) {
+    const vertices = face.vertices.map((vertex) => obj.vertices[vertex.vertexIndex - 1]);
+
+    const validVertices = vertices.map((vtx) => new Vec3(vtx.x, vtx.y, vtx.z));
+
+    if (hitTriangle(validVertices[0], validVertices[1], validVertices[2], r)) {
+      return true; // Ray intersects with the triangle
+    }
+  }
+
+  return false; // Ray does not intersect with the object
+}
+
+/**
+ * Determines the color of a pixel on a 3D object based on ray-object intersection.
+ * @param r - The ray for which to calculate the color.
+ * @returns The color of the pixel.
+ */
+export function rayColorObj(r: Ray, objFile: ObjModel): Color {
+  if (hitObj(objFile, r)) {
+    return new Vec3(1, 0, 0); // Return red color if the ray hits the object
+  }
+
+  const unitDirection: Vec3 = unitVector(r.direction());
+  const a: number = 0.5 * (unitDirection.y() + 1.0);
+
+  const white = new Vec3(1.0, 1.0, 1.0);
+  const blue = new Vec3(0.5, 0.7, 1.0);
+
+  // Linear interpolation (lerp) between white and blue based on the y-coordinate of the unit direction
+  return white.scale(1.0 - a).add(blue.scale(a));
+}
+
+/**
+ * Draws a 3D object and generates PPM content.
+ * @param imageWidth - The width of the image.
+ * @param imageHeight - The height of the image.
+ * @param cameraCenter - The center of the camera.
+ * @param pixel00Loc - The location of the top-left pixel.
+ * @param pixelDeltaU - The horizontal delta vector from pixel to pixel.
+ * @param pixelDeltaV - The vertical delta vector from pixel to pixel.
+ * @returns The PPM content representing the drawn 3D object.
+ */
+export function drawObj(
+  imageWidth: number,
+  imageHeight: number,
+  cameraCenter: Vec3,
+  pixel00Loc: Vec3,
+  pixelDeltaU: Vec3,
+  pixelDeltaV: Vec3,
+): string {
+  const objFilePath = 'src/obj/triangle.obj';
+  const data = fs.readFileSync(objFilePath, 'utf-8');
+  const parser = new CustomOBJParser(data);
+
+  const result = parser.parse();
+
+  let content = `P3\n${imageWidth} ${imageHeight}\n255\n`;
+
+  for (let j = 0; j < imageHeight; ++j) {
+    // console.log(`\rScanlines remaining: ${imageHeight - j} `);
+    for (let i = 0; i < imageWidth; ++i) {
+      const pixelCenter = pixel00Loc.add(pixelDeltaU.scale(i)).add(pixelDeltaV.scale(j));
+      const rayDirection = pixelCenter.subtract(cameraCenter);
+      const r = new Ray(cameraCenter, rayDirection);
+
+      const pixelColor = rayColorObj(r, result.models[0]);
+      content += writeColor(pixelColor);
+    }
+  }
+  console.log('Done');
+  return content;
+}
+
+/**
  * The main export function to generate images with spheres, triangles, and other 3D objects.
  */
 export function main() {
@@ -185,7 +269,7 @@ export function main() {
   const imageGenerator = new GenerateImage(imageWidth, imageHeight);
 
   // Camera
-  const focalLength = 1.0;
+  const focalLength = 1;
   const viewportHeight = 2.0;
   const viewportWidth = viewportHeight * (imageWidth / imageHeight);
   const cameraCenter = new Point3(0, 0, 0);
@@ -213,15 +297,7 @@ export function main() {
   imageGenerator.generateImage('sphere', sphere);
   imageGenerator.generateImage('triangle', triangle);
 
-  // const objFilePath = 'src/obj/golfball.obj';
-  // const data = fs.readFileSync(objFilePath, 'utf-8');
-  // const parser = new CustomOBJParser(data);
+  const obj = drawObj(imageWidth, imageHeight, cameraCenter, pixel00Loc, pixelDeltaU, pixelDeltaV);
 
-  // const result = parser.parse();
-
-  // const obj = visualizeObjFile(result, imageWidth, imageHeight, cameraCenter);
-
-  // imageGenerator.generateImage('objFromFile', obj);
+  imageGenerator.generateImage('triangleFromFile', obj);
 }
-
-main();
