@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>main | Atividade3</title><meta name="description" content="Documentation for Atividade3"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>drawObj | Atividade3</title><meta name="description" content="Documentation for Atividade3"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
 <div class="tsd-toolbar-contents container">
 <div class="table-cell" id="tsd-search" data-base="..">
 <div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
@@ -14,18 +14,52 @@
 <ul class="tsd-breadcrumb">
 <li><a href="../index.html">Atividade3</a></li>
 <li><a href="../modules/main.html">main</a></li>
-<li><a href="main.main.html">main</a></li></ul>
-<h1>Function main</h1></div>
+<li><a href="main.drawObj.html">drawObj</a></li></ul>
+<h1>Function drawObj</h1></div>
 <section class="tsd-panel">
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="main"><span class="tsd-kind-call-signature">main</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#main" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="drawObj"><span class="tsd-kind-call-signature">draw<wbr/>Obj</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">imageWidth</span>, <span class="tsd-kind-parameter">imageHeight</span>, <span class="tsd-kind-parameter">cameraCenter</span>, <span class="tsd-kind-parameter">pixel00Loc</span>, <span class="tsd-kind-parameter">pixelDeltaU</span>, <span class="tsd-kind-parameter">pixelDeltaV</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><a href="#drawObj" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>The main export function to generate images with spheres, triangles, and other 3D objects.</p>
+<div class="tsd-comment tsd-typography"><p>Draws a 3D object and generates PPM content.</p>
 </div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">imageWidth</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The width of the image.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">imageHeight</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The height of the image.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">cameraCenter</span>: <a href="../classes/vec_vec3.Vec3.html" class="tsd-signature-type tsd-kind-class">Vec3</a></h5>
+<div class="tsd-comment tsd-typography"><p>The center of the camera.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">pixel00Loc</span>: <a href="../classes/vec_vec3.Vec3.html" class="tsd-signature-type tsd-kind-class">Vec3</a></h5>
+<div class="tsd-comment tsd-typography"><p>The location of the top-left pixel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">pixelDeltaU</span>: <a href="../classes/vec_vec3.Vec3.html" class="tsd-signature-type tsd-kind-class">Vec3</a></h5>
+<div class="tsd-comment tsd-typography"><p>The horizontal delta vector from pixel to pixel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">pixelDeltaV</span>: <a href="../classes/vec_vec3.Vec3.html" class="tsd-signature-type tsd-kind-class">Vec3</a></h5>
+<div class="tsd-comment tsd-typography"><p>The vertical delta vector from pixel to pixel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><p>The PPM content representing the drawn 3D object.</p>
+
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in main.ts:259</li></ul></aside></li></ul></section></div>
+<li>Defined in main.ts:225</li></ul></aside></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

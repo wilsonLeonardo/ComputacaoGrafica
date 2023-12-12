@@ -119,9 +119,9 @@ export function hitTriangle(v0: Point3, v1: Point3, v2: Point3, r: Ray): boolean
  * @returns The color of the pixel.
  */
 export function rayColorTriangle(r: Ray): Color {
-  const v0: Point3 = new Vec3(-1, -1, -1);
-  const v1: Point3 = new Vec3(1, -1, -1);
-  const v2: Point3 = new Vec3(0, 1, -1);
+  const v0 = new Point3(-1, -1, -1);
+  const v1 = new Point3(1, -1, -1);
+  const v2 = new Point3(0, 1, -1);
 
   if (hitTriangle(v0, v1, v2, r)) {
     return new Vec3(1, 0, 0); // Return red color for the triangle

@@ -9,7 +9,7 @@ Na quarta atividade de Computação Gráfica, incorporamos detalhes das implemen
 
 ## Estrutura do Código
 
-Os arquivos desenvolvidos nas atividades anteriores foram integrados ao projeto atual, com adaptações nas classes para atender à proposta da atividade atual. Foram adicionadas funcionalidades, como a função `subtract` na classe `Vec3`, e ajustes nas operações para retornar uma nova instância da classe. Além disso, a função `generateImage` da classe `GenerateImage` foi tornada pública. As classes funcionais estão localizadas na pasta `src/utils`, a implementação de `Vec3` está em `src/vec`, e as visualizações geradas estão em `src/out`.
+Os arquivos desenvolvidos nas atividades anteriores foram integrados ao projeto atual, com adaptações nas classes para atender à proposta da atividade atual. Foram adicionadas funcionalidades, como a função `subtract` na classe `Vec3`, e ajustes nas operações para retornar uma nova instância da classe. Além disso, a função `generateImage` da classe `GenerateImage` foi tornada pública. As classes funcionais estão localizadas na pasta `src/utils`, a implementação de `Vec3` está em `src/vec`, e as visualizações geradas (`.ppm` e `.png`) estão em `src/out`.
 
 ## Como Executar
 
