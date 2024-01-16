@@ -23,7 +23,7 @@ npm install
 Para gerar os arquivos das visualizações com os materiais difusos, utilize o seguinte comando:
 
 ```bash
-yarn execute
+npm run execute
 ```
 
 ## Documentação
