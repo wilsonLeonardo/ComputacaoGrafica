@@ -40,7 +40,6 @@ export class HittableList implements Hittable {
    * @returns An object indicating whether the ray hits and the hit record.
    */
   hit(r: Ray, rayT: Interval): { objectHit: boolean; rec: HitRecord | null } {
-    const tempRec: HitRecord = new HitRecord();
     let hitAnything: boolean = false;
     let closestSoFar: number = rayT.max;
     let hitRecord: HitRecord;
@@ -49,7 +48,7 @@ export class HittableList implements Hittable {
       const { objectHit, rec } = object.hit(r, new Interval(rayT.min, closestSoFar));
       if (objectHit) {
         hitAnything = true;
-        closestSoFar = tempRec.t;
+        closestSoFar = rec!.t;
         hitRecord = rec!;
       }
     }
